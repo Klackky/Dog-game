@@ -1,19 +1,20 @@
 import * as React from 'react'
 import Form from './form.js';
-import * as request from 'superagent';
+import {setDog, getDogs} from '../actions/getDogs.js';
 import {connect} from 'react-redux';
+import * as request from 'superagent';
 
-export default class AlbumsListContainer extends React.Component {
+class FormContainer extends React.Component {
   state = {}
+ 
 
 
 componentDidMount() {
-  request
-    .get('https://dog.ceo/api/breeds/image/random')
-    .then(response => console.log(response.body.message))
-    .catch(console.error)
+  console.log('FormContainer componentDidMount this.props test:', this.props)
+
+  this.props.getDogs();
+
 }
-  
 
   
 
@@ -26,3 +27,12 @@ componentDidMount() {
 
 
 }
+
+const mapStateToProps = (state) => {
+  return {
+    getDog: state.dog
+  }
+}
+
+
+export default connect(mapStateToProps, {setDog, getDogs})(FormContainer)
