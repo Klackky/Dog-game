@@ -5,7 +5,10 @@ export function setDog(dog) {
   console.log('getDogs setDog dog test:', dog);
   return {
     type: SET_DOGS,
-    payload: dog
+    payload: {
+      url: dog,
+      breed: dog.split('breeds/').pop().split('/')[0]
+    }
   }
 }
 

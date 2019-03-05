@@ -1,16 +1,13 @@
 import * as React from 'react'
-import {connect} from 'react-redux';
 
-class Form extends React.Component {
-
-  render() {
+export default function form(props) {
   return (<div>
     <form className="game__content" action="">
     <div className="game__option">
       <label className="game__answer">
         <input name="question" type="radio" value="1"/>
       </label>
-      <label className="game__answer">
+      <label className="game__answer"> {props.options}
         <input name="question" type="radio" value="2t"/>
       </label>
       <label className="game__answer">
@@ -21,8 +18,5 @@ class Form extends React.Component {
   </form>
     </div>
   )
-}
 
 }
-
-export default Form;
