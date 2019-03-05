@@ -1,16 +1,11 @@
 import * as React from 'react'
 import Form from './form.js';
 import Image from './image.js';
-import {
-  setDog,
-  getDogs
-} from '../actions/getDogs.js';
-import {
-  connect
-} from 'react-redux';
+import * as request from 'superagent';
+import {setDog, getDogs} from '../actions/getDogs.js';
+import {connect} from 'react-redux';
 
 
-const breeds = ["american", "australian", "bedlington", "border", "dandie", "fox", "irish", "kerryblue", "lakeland", "norfolk", "norwich", "patterdale", "russell", "scottish", "sealyham", "silky", "tibetan", "toy", "westhighland", "wheaten", "whippet","affenpinscher", "african", "airedale", "akita", "appenzeller", "basenji", "beagle", "bluetick", "borzoi", "bouvier", "boxer", "brabancon", "briard", "bulldog","yorkshire"];
 
 
 
@@ -18,18 +13,25 @@ class GameContainer extends React.Component {
     state = {}
 
 
-
     componentDidMount() {
       this.props.getDogs();
+      // this.requestAllBreeds();
     }
 
+    // requestAllBreeds = () => {
+    //   request('https://dog.ceo/api/breeds/list/all')
+    //   .then(response => Object.keys(response.body.message))
+    //   .then(res => this.setState({allBreeds:res}))
+    // }
 
 
     render() {
-      {if (!this.props.photo) return 'Loading...'}
+      
+      {if (!this.props.dogs[0]) return 'Loading...'}
+      console.log(this.props.dogs[0])
       return (<div>
-        <Image photo = {this.props.photo}/> 
-        <Form options = {this.props.breed} />
+        <Image photo = {this.props.dogs[0].url}/> 
+        <Form options ={this.props.dogs} />  
         </div>)
       }
 
@@ -38,9 +40,11 @@ class GameContainer extends React.Component {
     }
 
     const mapStateToProps = (state) => {
+      console.log(state.getDog)
       return {
-        photo: state.getDog.url,
-        breed: state.getDog.breed
+        dogs: state.getDog
+     //   breed: state.getDog.breed,
+        // allBreeds:state.breeds
       }
     }
 

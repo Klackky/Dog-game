@@ -1,18 +1,16 @@
 import * as React from 'react'
 
 export default function form(props) {
+  console.log(props)
   return (<div>
     <form className="game__content" action="">
     <div className="game__option">
-      <label className="game__answer">
-        <input name="question" type="radio" value="1"/>
-      </label>
-      <label className="game__answer"> {props.options}
-        <input name="question" type="radio" value="2t"/>
-      </label>
-      <label className="game__answer">
-        <input name="question" type="radio" value="3"/>
-      </label>
+    {props.options.map(option => 
+    
+     <label key={option.breed} className="game__answer"> {option.breed}
+     <input name="question" type="radio" value="1"/>
+   </label>
+    )}
     </div>
     <button type="submit">Sumbit</button>
   </form>
