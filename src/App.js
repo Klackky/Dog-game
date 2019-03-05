@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Provider} from 'react-redux'
-import FormContainer from './components/formContainer'
+import GameContainer from './components/gameContainer'
 import store from './store.js'
 import './App.css';
 
@@ -12,7 +12,7 @@ class App extends Component {
         <header className="App-header">
         </header>
         <main>
-          <FormContainer />
+          <GameContainer />
         </main>
       </div>
       </Provider>

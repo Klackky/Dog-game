@@ -1,25 +1,26 @@
 import * as React from 'react'
 import Form from './form.js';
+import Image from './image.js';
 import {setDog, getDogs} from '../actions/getDogs.js';
 import {connect} from 'react-redux';
-import * as request from 'superagent';
 
-class FormContainer extends React.Component {
+class GameContainer extends React.Component {
   state = {}
  
 
 
 componentDidMount() {
-  console.log('FormContainer componentDidMount this.props test:', this.props)
 
   this.props.getDogs();
-
 }
 
   
 
   render() {
+    console.log(this.props.getDog)
+   {if (!this.props.getDog) return 'Loading...'}
     return (<div> 
+      <Image photo={this.props.getDog}/>
       <Form />
     </div>)
   }
@@ -30,9 +31,9 @@ componentDidMount() {
 
 const mapStateToProps = (state) => {
   return {
-    getDog: state.dog
+    getDog: state
   }
 }
 
 
-export default connect(mapStateToProps, {setDog, getDogs})(FormContainer)
+export default connect(mapStateToProps, {setDog, getDogs})(GameContainer)
