@@ -29,7 +29,7 @@ class GameContainer extends React.Component {
       {if (!this.props.photo) return 'Loading...'}
       return (<div>
         <Image photo = {this.props.photo}/> 
-        <Form options = {this.props.breed}/>
+        <Form options = {this.props.breed} />
         </div>)
       }
 
@@ -45,7 +45,4 @@ class GameContainer extends React.Component {
     }
 
 
-    export default connect(mapStateToProps, {
-      setDog,
-      getDogs
-    })(GameContainer)
+    export default connect(mapStateToProps, {setDog,getDogs})(GameContainer)
