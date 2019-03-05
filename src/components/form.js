@@ -8,16 +8,20 @@ export default class Form extends React.Component {
    }
 
    handleClick = (event) => {
-    console.log(this.props)
     event.preventDefault();
     if(this.props.correctAnswer === this.state.selectedOption) {
       alert(`correct`);
-      this.setState({score: this.state.score + 1})
+      this.setState({score: this.state.score +1}, function () {
+        this.props.callbackFromParent(this.state.score)
+    });
+      console.log(this.state.score);
     } else {
       alert(`not correct`)
     }
     this.props.updateFrame();
   }
+
+  
 
 
   handleOptionChange = changeEvent => {
@@ -27,6 +31,7 @@ export default class Form extends React.Component {
   };
 
   render() {
+    console.log(this.state.score)
   return (<div>
     <form className="game__content" onSubmit={this.handleClick}>
     <div className="game__option">
