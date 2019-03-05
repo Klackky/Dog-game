@@ -1,24 +1,24 @@
 import * as React from 'react'
 
 
-const checkIfAnswerIsCorrect = (answer) => {
-  console.log(answer);
-  if(answer === 'breed') {
-    alert(`heeey`);
-  }
-}
-
 export default class Form extends React.Component {
-   state = { selectedOption: '' }
+   state = { 
+     selectedOption: '',
+     score: 0
+   }
 
    handleClick = (event) => {
+    console.log(this.props)
     event.preventDefault();
     if(this.props.correctAnswer === this.state.selectedOption) {
-      console.log(`correct`);
+      alert(`correct`);
+      this.setState({score: this.state.score + 1})
     } else {
       alert(`not correct`)
     }
+    this.props.updateFrame();
   }
+
 
   handleOptionChange = changeEvent => {
     this.setState({

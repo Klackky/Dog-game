@@ -20,7 +20,7 @@ class GameContainer extends React.Component {
       console.log(this.props.dogs[0])
       return (<div>
         <Image photo = {this.props.dogs[0].url}/> 
-        <Form options ={this.props.dogs} correctAnswer={this.props.dogs[0].breed} />  
+        <Form options ={this.props.dogs} updateFrame={this.props.getDogs} correctAnswer={this.props.dogs[0].breed} />  
         </div>)
       }
     }
