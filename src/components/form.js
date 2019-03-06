@@ -13,15 +13,16 @@ export default class Form extends React.Component {
       alert(`correct`);
       this.setState({score: this.state.score +1}, function () {
         this.props.callbackFromParent(this.state.score)
-    });
-      console.log(this.state.score);
+      });
+      this.props.updateFrame();
     } else {
-      alert(`not correct`)
+      alert(`not correct! the right answer is ${this.props.correctAnswer}`)
+      setTimeout(() => {
+      this.props.updateFrame()
+      }, 2000);
     }
-    this.props.updateFrame();
+    
   }
-
-  
 
 
   handleOptionChange = changeEvent => {
@@ -30,8 +31,8 @@ export default class Form extends React.Component {
     });
   };
 
+
   render() {
-    console.log(this.state.score)
   return (<div>
     <form className="game__content" onSubmit={this.handleClick}>
     <div className="game__option">

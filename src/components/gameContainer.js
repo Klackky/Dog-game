@@ -6,9 +6,9 @@ import {connect} from 'react-redux';
 
 
 class GameContainer extends React.Component {
-   state = {
-     score: 0
-   }
+    state = {
+      score: 0
+    }
 
 
     componentDidMount() {
@@ -21,7 +21,6 @@ class GameContainer extends React.Component {
       })
     }
 
-
     render() {
       
       {if (!this.props.dogs[0]) return 'Loading...'}
@@ -30,16 +29,15 @@ class GameContainer extends React.Component {
         <Image photo = {this.props.dogs[0].url}/> 
         <Form options ={this.props.dogs} updateFrame={this.props.getDogs} callbackFromParent={this.myCallback} correctAnswer={this.props.dogs[0].breed} />  
         </div>)
-      }
     }
+}
 
-    const mapStateToProps = (state) => {
-      console.log(state.getDog)
-      return {
-        dogs: state.getDog,
-        selected: state.selectedOption
-      }
-    }
+const mapStateToProps = (state) => {
+  return {
+    dogs: state.getDog,
+    selected: state.selectedOption
+  }
+}
 
 
 export default connect(mapStateToProps, {setDog,getDogs})(GameContainer)

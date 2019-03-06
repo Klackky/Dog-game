@@ -8,7 +8,8 @@ export function setDog(dogs) {
     payload:dogs.map(dog => {
      return {
       url: dog,
-      breed: dog.split('breeds/').pop().split('/')[0] 
+      breed: dog.split('breeds/').pop().split('/')[0], 
+      id: Math.floor(Math.random() * 10 + 1)
      } 
     })
 }
@@ -28,12 +29,3 @@ export function getDogs() {
   }
 }
 
-
-// export const getDogs = title => dispatch => {
-//   request
-//     .post('https://dog.ceo/api/breeds/image/random')
-//     .send({ title })
-//     .then(response => response.body.message)
-//     .then(res => console.log(res))
-//     .then(response => dispatch(setDog(response.body.message)))
-// }
