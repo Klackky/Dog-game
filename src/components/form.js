@@ -1,27 +1,34 @@
 import * as React from 'react'
-import {connect} from 'react-redux';
 
-const checkIfAnswerIsCorrect = (answer) => {
-  console.log(answer);
-  if (answer === 'breed') {
-    alert(`heeey`);
-  }
-}
+
+
 
 export default class Form extends React.Component {
   state = {
     selectedOption: '',
+    score: 0,
     hintClicked: false
   }
 
-  handleClick = (event) => {
+    handleClick = (event) => {
     event.preventDefault();
-    if (this.props.correctAnswer === this.state.selectedOption) {
-      console.log(`correct`);
+    if(this.props.correctAnswer === this.state.selectedOption) {
+      alert(`correct`);
+      this.setState({score: this.state.score +1}, function () {
+        this.props.callbackFromParent(this.state.score)
+      });
+      
+      this.props.updateFrame();
     } else {
-      alert(`not correct`)
+      alert(`not correct! the right answer is ${this.props.correctAnswer}`)
+      setTimeout(() => {
+      this.props.updateFrame()
+      }, 2000);
     }
+
+    
   }
+
 
   handleOptionChange = changeEvent => {
     this.setState({
@@ -51,22 +58,31 @@ export default class Form extends React.Component {
   }
 
   render() {
-
-
-
-    return (<div>
-      <form className="game__content" onSubmit={this.handleClick}>
-        <div className="game__option">
-
+  if (this.props.number === 1) {
+  return (<div>
+    <form className="game__content" onSubmit={this.handleClick}>
+    <div className="game__option">
           {this.filterOptions()}
-        </div>
-        <button type="submit"> Submit </button>
-      </form>
-      <button onClick={this.handleHint}>Hint</button>
-
     </div>
-    )
+    <button type="submit"> Submit </button>
+  </form>
+   <button onClick={this.handleHint}>Hint</button>
+    </div>)
+  } else {
+    return (<div>
+      <form className="game__content"  onSubmit={this.handleClick}>
+      {this.props.options.map(option => 
+  
+           <div className="game__option">
+            <label key={option.url} className="game-answer">
+           <input onChange={this.handleOptionChange} type="radio" name="answer" className="input-hidden" value = {option.url}/>
+                   <img src = {option.url}  
+                          alt = "dog"/>
+           </label>
+           </div>)}
+      <button type="submit">Sumbit</button>
+    </form>
+      </div>)
   }
 
-}
-
+}}
