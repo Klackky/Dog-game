@@ -2,13 +2,13 @@ import * as request from 'superagent';
 export const SET_DOGS = 'SET_DOGS';
 
 export function setDog(dogs) {
-  console.log('getDogs setDog dog test:', dogs);
   return {
     type: SET_DOGS,
     payload:dogs.map(dog => {
      return {
       url: dog,
-      breed: dog.split('breeds/').pop().split('/')[0] 
+      breed: dog.split('breeds/').pop().split('/')[0],
+      number: Math.floor(Math.random() * 2 + 1)
      } 
     })
 }
@@ -27,13 +27,3 @@ export function getDogs() {
       })
   }
 }
-
-
-// export const getDogs = title => dispatch => {
-//   request
-//     .post('https://dog.ceo/api/breeds/image/random')
-//     .send({ title })
-//     .then(response => response.body.message)
-//     .then(res => console.log(res))
-//     .then(response => dispatch(setDog(response.body.message)))
-// }
