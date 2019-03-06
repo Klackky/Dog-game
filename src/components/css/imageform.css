@@ -1,0 +1,20 @@
+.input-hidden {
+    position: absolute;
+    left: -9999px;
+  }
+  
+  input[type=radio] + img {
+    border: 1px dashed #444;
+    width: 150px;
+    height: 150px;
+    transition: 500ms all;
+    cursor: pointer;
+  }
+  
+  input[type=radio]:checked + img {
+    transform: 
+      rotateZ(-10deg) 
+      rotateX(10deg);
+      border: 1px solid #fff;
+      box-shadow: 0 0 3px 3px red;
+  }
