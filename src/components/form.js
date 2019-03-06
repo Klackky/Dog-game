@@ -14,6 +14,7 @@ export default class Form extends React.Component {
       this.setState({score: this.state.score +1}, function () {
         this.props.callbackFromParent(this.state.score)
       });
+      
       this.props.updateFrame();
     } else {
       alert(`not correct! the right answer is ${this.props.correctAnswer}`)
@@ -21,6 +22,7 @@ export default class Form extends React.Component {
       this.props.updateFrame()
       }, 2000);
     }
+
     
   }
 
@@ -33,6 +35,7 @@ export default class Form extends React.Component {
 
 
   render() {
+  if (this.props.number === 1) {
   return (<div>
     <form className="game__content" onSubmit={this.handleClick}>
     <div className="game__option">
@@ -45,8 +48,22 @@ export default class Form extends React.Component {
     </div>
     <button type="submit"> Submit </button>
   </form>
-    </div>
-  )
-}
+    </div>)
+  } else {
+    return (<div>
+      <form className="game__content"  onSubmit={this.handleClick}>
+      {this.props.options.map(option => 
+  
+           <div className="game__option">
+            <label key={option.url} className="game-answer">
+           <input onChange={this.handleOptionChange} type="radio" name="answer" className="input-hidden" value = {option.url}/>
+                   <img src = {option.url}  
+                          alt = "dog"/>
+           </label>
+           </div>)}
+      <button type="submit">Sumbit</button>
+    </form>
+      </div>)
+  }
 
-}
+}}

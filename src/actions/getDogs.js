@@ -1,15 +1,15 @@
 import * as request from 'superagent';
 export const SET_DOGS = 'SET_DOGS';
 
-export function setDog(dogs) {
+export function setDog(dogs, number) {
   console.log('getDogs setDog dog test:', dogs);
   return {
     type: SET_DOGS,
     payload:dogs.map(dog => {
      return {
       url: dog,
-      breed: dog.split('breeds/').pop().split('/')[0], 
-      id: Math.floor(Math.random() * 10 + 1)
+      breed: dog.split('breeds/').pop().split('/')[0],
+      number: Math.floor(Math.random() * 2 + 1)
      } 
     })
 }
