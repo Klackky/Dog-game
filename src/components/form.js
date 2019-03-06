@@ -6,27 +6,20 @@ import * as React from 'react'
 export default class Form extends React.Component {
   state = {
     selectedOption: '',
-    score: 0,
-    hintClicked: false
+    hintClicked: false,
+    score: 0
   }
 
-    handleClick = (event) => {
-    event.preventDefault();
+    handleClick = () => {
     if(this.props.correctAnswer === this.state.selectedOption) {
       alert(`correct`);
       this.setState({score: this.state.score +1}, function () {
         this.props.callbackFromParent(this.state.score)
       });
       
-      this.props.updateFrame();
     } else {
       alert(`not correct! the right answer is ${this.props.correctAnswer}`)
-      setTimeout(() => {
-      this.props.updateFrame()
-      }, 2000);
     }
-
-    
   }
 
 
@@ -74,7 +67,7 @@ export default class Form extends React.Component {
       {this.props.options.map(option => 
   
            <div className="game__option">
-            <label key={option.url} className="game-answer">
+           <label key={option.url} className="game-answer">
            <input onChange={this.handleOptionChange} type="radio" name="answer" className="input-hidden" value = {option.url}/>
                    <img src = {option.url}  
                           alt = "dog"/>
