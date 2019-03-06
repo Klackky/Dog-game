@@ -1,8 +1,7 @@
 import * as request from 'superagent';
 export const SET_DOGS = 'SET_DOGS';
 
-export function setDog(dogs, number) {
-  console.log('getDogs setDog dog test:', dogs);
+export function setDog(dogs) {
   return {
     type: SET_DOGS,
     payload:dogs.map(dog => {
@@ -28,4 +27,3 @@ export function getDogs() {
       })
   }
 }
-

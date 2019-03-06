@@ -1,13 +1,16 @@
 import * as React from 'react'
 
 
-export default class Form extends React.Component {
-   state = { 
-     selectedOption: '',
-     score: 0
-   }
 
-   handleClick = (event) => {
+
+export default class Form extends React.Component {
+  state = {
+    selectedOption: '',
+    score: 0,
+    hintClicked: false
+  }
+
+    handleClick = (event) => {
     event.preventDefault();
     if(this.props.correctAnswer === this.state.selectedOption) {
       alert(`correct`);
@@ -33,21 +36,37 @@ export default class Form extends React.Component {
     });
   };
 
+  handleHint = () => {
+    this.setState({
+      hintClicked: true
+    })
+  }
+
+  correctAnswerOrHint = (option, index) =>
+    !this.state.hintClicked ||
+    option.breed === this.props.correctAnswer ||
+    index >= 2
+
+  filterOptions = () => {
+    return this.props.options
+      .filter(this.correctAnswerOrHint)
+      .map(option =>
+        <label key={option.breed} className="game__answer"> {option.breed}
+          <input onChange={this.handleOptionChange} name="question" type="radio" value={option.breed} />
+        </label>
+      )
+  }
 
   render() {
   if (this.props.number === 1) {
   return (<div>
     <form className="game__content" onSubmit={this.handleClick}>
     <div className="game__option">
-    {this.props.options.map(option => 
-    
-     <label key={option.breed} className="game__answer"> {option.breed}
-     <input onChange={this.handleOptionChange} name="question" type="radio" value={option.breed}/>
-   </label>
-    )}
+          {this.filterOptions()}
     </div>
     <button type="submit"> Submit </button>
   </form>
+   <button onClick={this.handleHint}>Hint</button>
     </div>)
   } else {
     return (<div>
