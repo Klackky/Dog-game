@@ -1,0 +1,16 @@
+.game__image {
+  margin: 0 auto;
+  display: block;
+}
+
+.game__header {
+  text-align: center;
+  font-size: 22px;
+  color: #F87DA9;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.game__question {
+  text-align: center;
+  font-size: 22px;
+}

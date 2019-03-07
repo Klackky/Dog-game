@@ -1,0 +1,23 @@
+.progress-bar {
+  position: relative;
+  height: 20px;
+  width: 350px;
+  border-radius: 50px;
+  border: 1px solid black;
+  margin: 50px auto 20px;
+}
+
+
+.filler {
+  background: #F87DA9;
+  height: 100%;
+  border-radius: inherit;
+  transition: width .2s ease-in;
+}
+
+.progress-bar__success-rate {
+  margin-top: -10px;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 80px;
+}
