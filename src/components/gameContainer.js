@@ -16,6 +16,8 @@ class GameContainer extends React.Component {
       this.props.getDogs();
     }
 
+
+   
     myCallback = (dataFromChild) => {
       this.setState({
         score: dataFromChild
@@ -36,6 +38,7 @@ class GameContainer extends React.Component {
         return (<div>
           <Image photo = {this.props.dogs[0].breed} number={this.props.dogs[0].number}/> 
           <Form options ={this.props.dogs}  number={this.props.dogs[0].number}updateFrame={this.props.getDogs} callbackFromParent={this.myCallback} correctAnswer={this.props.dogs[0].url } />   
+          
           </div>)
       }
       }

@@ -18,7 +18,6 @@ class App extends Component {
         </header>
         <main>
         <GameContainer />
-         
         </main>
       </div>
       </Provider>
