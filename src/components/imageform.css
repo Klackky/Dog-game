@@ -27,8 +27,19 @@
   box-sizing: border-box;
   background-color: transparent;
   font-size: 14px;
-  margin: 20px auto;
+  margin: 50px auto 20px;
   display: block;
+  cursor: pointer;
+  border: 1px solid #F87DA9;
+}
+
+.game__submit:hover {
+  color: white;
+  background-color: #F87DA9
+}
+
+.game-answer {
+  margin-right: 20px;
 }
 
 
@@ -83,3 +94,17 @@
     transform: scale(1);
 }
 
+.game__hint {
+  padding: 10px;
+  background-color: #F87DA9;
+  color: white;
+  border: 1px solid #F87DA9;
+  margin: 10px auto;
+  display: block;
+  cursor: pointer;
+}
+
+.game__hint:hover {
+  background-color: white;
+  color:#F87DA9;
+}

@@ -98,6 +98,7 @@ export default class Form extends React.Component {
   render() {
   if (this.props.number === 1) {
   return (<div>
+     <button onClick={this.handleHint} className="game__hint">Hint</button>
     <form className="game__content" onSubmit={this.handleClick}>
     <div className="game__wrapper">
       <div className="game__option">
@@ -106,8 +107,6 @@ export default class Form extends React.Component {
     </div>
     <button className="game__submit" type="submit"> Submit </button>
   </form>
-
-   <button onClick={this.handleHint}>Hint</button>
 
        {this.state.showPopup ? 
           <Popup
@@ -122,6 +121,7 @@ export default class Form extends React.Component {
   )
   } else {
     return (<div>
+      <button onClick={this.handleHint} className="game__hint">Hint</button>
       <form className="game__content"  onSubmit={this.handleClick}>
       <div className="game__wrapper">
         <div className="game__option">
@@ -130,7 +130,6 @@ export default class Form extends React.Component {
       </div>
       <button className="game__submit" type="submit"> Submit </button>
     </form>
- <button onClick={this.handleHint}>Hint</button>
     {this.state.showPopup ? 
           <Popup
             text={this.props.correctAnswer}
