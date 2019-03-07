@@ -1,27 +1,45 @@
 import * as React from 'react'
+import './imageform.css'
+import Popup from './PopUp.js'
+
 
 export default class Form extends React.Component {
   state = {
     selectedOption: '',
+    hintClicked: false,
     score: 0,
-    hintClicked: false
+    totalLevels: 0,
+    showPopup: false,
+    accuracy: 0
   }
 
-    handleClick = (event) => {
-      event.preventDefault() 
-   
+  togglePopup() {
+    if(this.state.showPopup) {
+      this.setState({
+        showPopup: false
+      }) 
+    } else {
+      this.setState({
+        showPopup: true
+      }) 
+    }
+  }  
+
+  handleClick = (event) => {
+    event.preventDefault();
     if(this.props.correctAnswer === this.state.selectedOption) {
-      alert(`correct`);
-      this.setState({score: this.state.score +1, hintClicked: false
-      }, function () {
-        this.props.callbackFromParent(this.state.score)
-      });
+      this.setState({score: this.state.score +1, totalLevels: this.state.totalLevels + 1, hintClicked: false}, function () {
+        this.props.callbackFromParent(this.state.score, this.state.totalLevels)
       
       this.props.updateFrame();
     } else {
-      alert(`not correct! the right answer is ${this.props.correctAnswer}`)
+      this.setState({score: this.state.score, totalLevels: this.state.totalLevels + 1}, function () {
+        this.props.callbackFromParent(this.state.score, this.state.totalLevels)
+      });
+      this.togglePopup()
       setTimeout(() => {
       this.props.updateFrame()
+      this.togglePopup()
       }, 2000);
     }
 }
@@ -38,12 +56,6 @@ export default class Form extends React.Component {
       hintClicked: true
     })
    }
-
- 
-  correctAnswerOrHint = (option, index) =>
-    !this.state.hintClicked ||
-    option.breed === this.props.correctAnswer ||
-    index >= 2
 
   correctAnswerOrHintTwo = (option, index) => 
     !this.state.hintClicked ||
@@ -79,26 +91,48 @@ export default class Form extends React.Component {
   if (this.props.number === 1) {
   return (<div>
     <form className="game__content" onSubmit={this.handleClick}>
+    <div className="game__wrapper">
     <div className="game__option">
           {this.filterOptions()}
     </div>
-    <button type="submit"> Submit </button>
+    </div>
+    <button className="game__submit" type="submit"> Submit </button>
   </form>
-   <button onKeyDown = {this.handleHint}
-  onClick={this.handleHint}
-   >Hint</button>
-    </div>)
+
+   <button onClick={this.handleHint}>Hint</button>
+
+       {this.state.showPopup ? 
+          <Popup
+            text={this.props.correctAnswer}
+            closePopup={this.togglePopup.bind(this)}
+          />
+          : null
+        }
+    </div>
+    
+    
+  )
   } else {
     return (<div>
       <form className="game__content"  onSubmit={this.handleClick}>
-      <div className="game__option">
+      <div className="game__wrapper">
+      {this.props.options.map(option => 
+  
+           <div className="game__option">
       {this.filterOptionsTwo()}
       </div>
-      <button type="submit">Sumbit</button>
+      <button className="game__submit" type="submit">Sumbit</button>
     </form>
-    <button onClick={this.handleHint}>Hint</button>
+ <button onClick={this.handleHint}>Hint</button>
 
-      </div>)
-  }
+    {this.state.showPopup ? 
+          <Popup
+            text={this.props.correctAnswer}
+            closePopup={this.togglePopup.bind(this)}
+          />
+          : null
+        }
+   <button onClick={this.handleHint}> Hint</button>
+    </div>)
 
 }}

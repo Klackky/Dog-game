@@ -1,0 +1,14 @@
+.game__image {
+  margin: 0 auto;
+  display: block;
+}
+
+.game__header {
+  text-align: center;
+  font-size: 22px;
+}
+
+.game__question {
+  text-align: center;
+  font-size: 22px;
+}
