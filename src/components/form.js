@@ -1,25 +1,34 @@
 import * as React from 'react'
 
-
-
-
 export default class Form extends React.Component {
   state = {
     selectedOption: '',
     hintClicked: false,
-    score: 0
+    score: 0,
+    totalLevels: 0,
+    accuracy: 0
   }
 
-    handleClick = () => {
+  handleClick = (event) => {
+    event.preventDefault();
     if(this.props.correctAnswer === this.state.selectedOption) {
       alert(`correct`);
-      this.setState({score: this.state.score +1}, function () {
-        this.props.callbackFromParent(this.state.score)
+      this.setState({score: this.state.score +1, totalLevels: this.state.totalLevels + 1}, function () {
+        this.props.callbackFromParent(this.state.score, this.state.totalLevels)
       });
       
+      this.props.updateFrame();
     } else {
       alert(`not correct! the right answer is ${this.props.correctAnswer}`)
+      this.setState({score: this.state.score, totalLevels: this.state.totalLevels + 1}, function () {
+        this.props.callbackFromParent(this.state.score, this.state.totalLevels)
+      });
+      setTimeout(() => {
+      this.props.updateFrame()
+      }, 2000);
     }
+
+    
   }
 
 
