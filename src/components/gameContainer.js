@@ -51,6 +51,8 @@ class GameContainer extends React.Component {
           <ProgressBar progress={this.state.accuracy}/>
           <Image photo = {this.props.dogs[0].breed} number={this.props.dogs[0].number}/> 
           <Form options ={this.props.dogs}  updateFrame={this.props.getDogs} number={this.props.dogs[0].number} callbackFromParent={this.myCallback} correctAnswer={this.props.dogs[0].url } />   
+
+
           </div>)
       }
       }

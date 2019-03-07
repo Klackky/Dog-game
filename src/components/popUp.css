@@ -31,7 +31,7 @@
 }
 
 .popup__image {
-  width: 200px;
+  width: auto;
+  height: 200px;
   margin: 20px;
-  height: auto;
 }

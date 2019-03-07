@@ -14,3 +14,9 @@
   border-radius: inherit;
   transition: width .2s ease-in;
 }
+
+.progress-bar__success-rate {
+  margin-top: -10px;
+  font-size: 14px;
+  text-align: center;
+}
