@@ -1,4 +1,6 @@
 import * as React from 'react'
+import './imageform.css'
+import Popup from './PopUp.js'
 
 export default class Form extends React.Component {
   state = {
@@ -6,25 +8,38 @@ export default class Form extends React.Component {
     hintClicked: false,
     score: 0,
     totalLevels: 0,
+    showPopup: false,
     accuracy: 0
   }
+
+  togglePopup() {
+    if(this.state.showPopup) {
+      this.setState({
+        showPopup: false
+      }) 
+    } else {
+      this.setState({
+        showPopup: true
+      }) 
+    }
+  }  
 
   handleClick = (event) => {
     event.preventDefault();
     if(this.props.correctAnswer === this.state.selectedOption) {
-      alert(`correct`);
       this.setState({score: this.state.score +1, totalLevels: this.state.totalLevels + 1}, function () {
         this.props.callbackFromParent(this.state.score, this.state.totalLevels)
       });
       
       this.props.updateFrame();
     } else {
-      alert(`not correct! the right answer is ${this.props.correctAnswer}`)
       this.setState({score: this.state.score, totalLevels: this.state.totalLevels + 1}, function () {
         this.props.callbackFromParent(this.state.score, this.state.totalLevels)
       });
+      this.togglePopup()
       setTimeout(() => {
       this.props.updateFrame()
+      this.togglePopup()
       }, 2000);
     }
 
@@ -43,6 +58,7 @@ export default class Form extends React.Component {
       hintClicked: true
     })
   }
+
 
   correctAnswerOrHint = (option, index) =>
     !this.state.hintClicked ||
@@ -63,16 +79,30 @@ export default class Form extends React.Component {
   if (this.props.number === 1) {
   return (<div>
     <form className="game__content" onSubmit={this.handleClick}>
+    <div className="game__wrapper">
     <div className="game__option">
           {this.filterOptions()}
     </div>
-    <button type="submit"> Submit </button>
+    </div>
+    <button className="game__submit" type="submit"> Submit </button>
   </form>
    <button onClick={this.handleHint}>Hint</button>
-    </div>)
+
+       {this.state.showPopup ? 
+          <Popup
+            text={this.props.correctAnswer}
+            closePopup={this.togglePopup.bind(this)}
+          />
+          : null
+        }
+    </div>
+    
+    
+  )
   } else {
     return (<div>
       <form className="game__content"  onSubmit={this.handleClick}>
+      <div className="game__wrapper">
       {this.props.options.map(option => 
   
            <div className="game__option">
@@ -82,8 +112,17 @@ export default class Form extends React.Component {
                           alt = "dog"/>
            </label>
            </div>)}
-      <button type="submit">Sumbit</button>
+           </div>
+      <button className="game__submit" type="submit">Sumbit</button>
     </form>
+
+    {this.state.showPopup ? 
+          <Popup
+            text={this.props.correctAnswer}
+            closePopup={this.togglePopup.bind(this)}
+          />
+          : null
+        }
       </div>)
   }
 

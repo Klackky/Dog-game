@@ -4,10 +4,7 @@ import './progressBar.css'
 
 
 
-export default function ProgressBar(props) {
-  console.log(props)
-  const gradient = `linear-gradient(to right, #1bad01 ${props.progress}%, crimson ${props.progress}%)`
-   
+export default function ProgressBar(props) { 
   return (
   
   <div className="progress-bar">

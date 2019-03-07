@@ -1,0 +1,32 @@
+.input-hidden {
+    position: absolute;
+    left: -9999px;
+  }
+  
+  input[type=radio] + img {
+    border: 1px dashed #444;
+    width: 150px;
+    height: 150px;
+    transition: 500ms all;
+    cursor: pointer;
+  }
+  
+  input[type=radio]:checked + img {
+   border: 2px solid blue;
+}
+
+.game__wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 20px auto;
+}
+
+.game__submit {
+  width: 250px;
+  padding: 15px;
+  box-sizing: border-box;
+  background-color: transparent;
+  font-size: 14px;
+  margin: 20px auto;
+  display: block;
+}
