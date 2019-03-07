@@ -2,6 +2,7 @@ import * as React from 'react'
 import './imageform.css'
 import Popup from './PopUp.js'
 
+
 export default class Form extends React.Component {
   state = {
     selectedOption: '',
@@ -27,9 +28,8 @@ export default class Form extends React.Component {
   handleClick = (event) => {
     event.preventDefault();
     if(this.props.correctAnswer === this.state.selectedOption) {
-      this.setState({score: this.state.score +1, totalLevels: this.state.totalLevels + 1}, function () {
+      this.setState({score: this.state.score +1, totalLevels: this.state.totalLevels + 1, hintClicked: false}, function () {
         this.props.callbackFromParent(this.state.score, this.state.totalLevels)
-      });
       
       this.props.updateFrame();
     } else {
@@ -42,9 +42,7 @@ export default class Form extends React.Component {
       this.togglePopup()
       }, 2000);
     }
-
-    
-  }
+}
 
 
   handleOptionChange = changeEvent => {
@@ -52,17 +50,16 @@ export default class Form extends React.Component {
       selectedOption: changeEvent.target.value
     });
   };
-
+  
   handleHint = () => {
     this.setState({
       hintClicked: true
     })
-  }
+   }
 
-
-  correctAnswerOrHint = (option, index) =>
+  correctAnswerOrHintTwo = (option, index) => 
     !this.state.hintClicked ||
-    option.breed === this.props.correctAnswer ||
+    option.url === this.props.correctAnswer ||
     index >= 2
 
   filterOptions = () => {
@@ -72,7 +69,22 @@ export default class Form extends React.Component {
         <label key={option.breed} className="game__answer"> {option.breed}
           <input onChange={this.handleOptionChange} name="question" type="radio" value={option.breed} />
         </label>
-      )
+      ) 
+     
+  }
+
+  filterOptionsTwo = () => {
+   return this.props.options
+   .filter(this.correctAnswerOrHintTwo)
+   .map(option => 
+  
+
+       <label key={option.url} className="game-answer">
+      <input onChange={this.handleOptionChange} type="radio" name="answer" className="input-hidden" value = {option.url}/>
+              <img src = {option.url}  
+                     alt = "dog"/>
+      </label>
+   )
   }
 
   render() {
@@ -86,6 +98,7 @@ export default class Form extends React.Component {
     </div>
     <button className="game__submit" type="submit"> Submit </button>
   </form>
+
    <button onClick={this.handleHint}>Hint</button>
 
        {this.state.showPopup ? 
@@ -106,15 +119,11 @@ export default class Form extends React.Component {
       {this.props.options.map(option => 
   
            <div className="game__option">
-           <label key={option.url} className="game-answer">
-           <input onChange={this.handleOptionChange} type="radio" name="answer" className="input-hidden" value = {option.url}/>
-                   <img src = {option.url}  
-                          alt = "dog"/>
-           </label>
-           </div>)}
-           </div>
+      {this.filterOptionsTwo()}
+      </div>
       <button className="game__submit" type="submit">Sumbit</button>
     </form>
+ <button onClick={this.handleHint}>Hint</button>
 
     {this.state.showPopup ? 
           <Popup
@@ -123,7 +132,7 @@ export default class Form extends React.Component {
           />
           : null
         }
-      </div>)
-  }
+   <button onClick={this.handleHint}> Hint</button>
+    </div>)
 
 }}
