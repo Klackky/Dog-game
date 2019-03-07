@@ -73,9 +73,10 @@ export default class Form extends React.Component {
       return this.props.options
         .filter(this.correctAnswerOrHint)
         .map(option =>
-          <label key={option.breed} className="game__answer"> {option.breed}
-            <input onChange={this.handleOptionChange} name="question" type="radio" value={option.breed} />
-          </label>
+         <p>
+            <input className="game__radio" onChange={this.handleOptionChange} name="question" type="radio" value={option.breed} id={option.breed} />
+            <label for={option.breed} key={option.breed} className="game__answer" data-a="42"> {option.breed}</label>
+         </p>
         )
    
     }
@@ -86,9 +87,9 @@ export default class Form extends React.Component {
      .map(option =>
    
    
-         <label key={option.url} className="game-answer">
-        <input onChange={this.handleOptionChange} type="radio" name="answer" className="input-hidden" value = {option.url}/>
-                <img src = {option.url}
+        <label key={option.url} className="game-answer">
+            <input onChange={this.handleOptionChange} type="radio" name="answer" className="input-hidden"     value = {option.url}/>
+                    <img src = {option.url}
                        alt = "dog"/>
         </label>
      )
