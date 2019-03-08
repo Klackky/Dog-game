@@ -11,7 +11,7 @@ export default class Form extends React.Component {
     totalLevels: 0,
     showPopup: false,
     accuracy: 0,
-    time: 10
+    correctInRow: 0
   }
 
   togglePopup() {
@@ -29,14 +29,14 @@ export default class Form extends React.Component {
   handleClick = (event) => {
     event.preventDefault();
     if(this.props.correctAnswer === this.state.selectedOption) {
-      this.setState({score: this.state.score +1, totalLevels: this.state.totalLevels + 1, hintClicked: false}, function () {
-        this.props.callbackFromParent(this.state.score, this.state.totalLevels)
+      this.setState({score: this.state.score +1, totalLevels: this.state.totalLevels + 1, hintClicked: false, correctInRow: this.state.correctInRow +1}, function () {
+        this.props.callbackFromParent(this.state.score, this.state.totalLevels, this.state.correctInRow)
       
       this.props.updateFrame();
     }) 
     } else {
-      this.setState({score: this.state.score, totalLevels: this.state.totalLevels + 1, hintClicked:false}, function () {
-        this.props.callbackFromParent(this.state.score, this.state.totalLevels)
+      this.setState({score: this.state.score, totalLevels: this.state.totalLevels + 1, hintClicked:false, correctInRow: this.state.correctInRow = 0}, function () {
+        this.props.callbackFromParent(this.state.score, this.state.totalLevels, this.state.correctInRow)
       });
       this.togglePopup()
       setTimeout(() => {
@@ -96,6 +96,7 @@ componentDidUpdate() {
     }
    
     filterOptionsTwo = () => {
+
      return this.props.options
      .filter(this.correctAnswerOrHintTwo)
      .map(option =>
