@@ -1,0 +1,16 @@
+.keyboard-box{
+     
+    background-color:  #F87DA9;
+    display: block;
+    padding: 10px;
+    background-color: #F87DA9;
+    color: white;
+    border: 1px solid #F87DA9;
+    margin: 10px auto;
+    font-size: 12px; 
+    width: 350px;
+    grid-area: a;
+    position: relative;
+    right: 480px;
+    top : 0px
+}

@@ -108,3 +108,7 @@
   background-color: white;
   color:#F87DA9;
 }
+
+.game__question {
+  text-transform: uppercase;
+}
