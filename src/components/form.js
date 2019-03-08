@@ -74,7 +74,7 @@ export default class Form extends React.Component {
       return this.props.options
         .filter(this.correctAnswerOrHint)
         .map(option =>
-          <label key={option.breed} className="game__answer"> {option.breed}
+          <label key={option.url} className="game__answer"> {option.breed}
             <input onChange={this.handleOptionChange} name="question" type="radio" value={option.breed} />
           </label>
         )
@@ -82,6 +82,7 @@ export default class Form extends React.Component {
     }
    
     filterOptionsTwo = () => {
+
      return this.props.options
      .filter(this.correctAnswerOrHintTwo)
      .map(option =>
@@ -96,6 +97,7 @@ export default class Form extends React.Component {
     }
 
   render() {
+    console.log(this.props, 'props', this.state, 'state')
   if (this.props.number === 1) {
   return (<div>
     <form className="game__content" onSubmit={this.handleClick}>
