@@ -18,7 +18,7 @@ export function setDog(dogs) {
 export function getDogs() {
   console.log('getDogs test!')
   return function (dispatch) {
-    request('https://dog.ceo/api/breeds/image/random/3')
+    request('https://dog.ceo/api/breeds/image/random/6')
       .then(response => {
         console.log('response test:', response)
         const dogSetter = setDog(response.body.message)
