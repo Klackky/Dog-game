@@ -74,9 +74,10 @@ export default class Form extends React.Component {
       return this.props.options
         .filter(this.correctAnswerOrHint)
         .map(option =>
-          <label key={option.url} className="game__answer"> {option.breed}
-            <input onChange={this.handleOptionChange} name="question" type="radio" value={option.breed} />
-          </label>
+         <p>
+            <input className="game__radio" onChange={this.handleOptionChange} name="question" type="radio" value={option.breed} id={option.breed} />
+            <label for={option.breed} key={option.breed} className="game__answer" data-a="42"> {option.breed}</label>
+         </p>
         )
    
     }
@@ -88,9 +89,9 @@ export default class Form extends React.Component {
      .map(option =>
    
    
-         <label key={option.url} className="game-answer">
-        <input onChange={this.handleOptionChange} type="radio" name="answer" className="input-hidden" value = {option.url}/>
-                <img src = {option.url}
+        <label key={option.url} className="game-answer">
+            <input onChange={this.handleOptionChange} type="radio" name="answer" className="input-hidden"     value = {option.url}/>
+                    <img src = {option.url}
                        alt = "dog"/>
         </label>
      )
@@ -100,6 +101,7 @@ export default class Form extends React.Component {
     console.log(this.props, 'props', this.state, 'state')
   if (this.props.number === 1) {
   return (<div>
+     <button onClick={this.handleHint} className="game__hint">Hint</button>
     <form className="game__content" onSubmit={this.handleClick}>
     <div className="game__wrapper">
       <div className="game__option">
@@ -108,8 +110,6 @@ export default class Form extends React.Component {
     </div>
     <button className="game__submit" type="submit"> Submit </button>
   </form>
-
-   <button onClick={this.handleHint}>Hint</button>
 
        {this.state.showPopup ? 
           <Popup
@@ -124,6 +124,7 @@ export default class Form extends React.Component {
   )
   } else {
     return (<div>
+      <button onClick={this.handleHint} className="game__hint">Hint</button>
       <form className="game__content"  onSubmit={this.handleClick}>
       <div className="game__wrapper">
         <div className="game__option">
@@ -132,7 +133,6 @@ export default class Form extends React.Component {
       </div>
       <button className="game__submit" type="submit"> Submit </button>
     </form>
- <button onClick={this.handleHint}>Hint</button>
     {this.state.showPopup ? 
           <Popup
             text={this.props.correctAnswer}
