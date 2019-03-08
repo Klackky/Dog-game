@@ -4,7 +4,7 @@ import Image from './image.js';
 import ProgressBar from './progressBar.js';
 import {setDog, getDogs} from '../actions/getDogs.js';
 import {connect} from 'react-redux';
-
+import KeyboardHint from './keyboardHint'
 
 class GameContainer extends React.Component {
     state = {
@@ -42,16 +42,16 @@ class GameContainer extends React.Component {
       if (this.props.dogs[0].number === 1) {
         return (<div>
           <ProgressBar progress={this.state.accuracy}/>
+          <KeyboardHint/>
           <Image photo = {this.props.dogs[0].url} number={this.props.dogs[0].number}/> 
           <Form options ={this.props.dogs} updateFrame={this.props.getDogs} callbackFromParent={this.myCallback} number={this.props.dogs[0].number} correctAnswer={this.props.dogs[0].breed} />
-
           </div>)
       } else {
         return (<div>
           <ProgressBar progress={this.state.accuracy}/>
+          <KeyboardHint/>
           <Image photo = {this.props.dogs[0].breed} number={this.props.dogs[0].number}/> 
           <Form options ={this.props.dogs}  updateFrame={this.props.getDogs} number={this.props.dogs[0].number} callbackFromParent={this.myCallback} correctAnswer={this.props.dogs[0].url } />   
-
 
           </div>)
       }

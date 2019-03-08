@@ -32,20 +32,24 @@ export default class Form extends React.Component {
    console.log('imageOPtion',this.state.imageOption)
 
     const { options } = this.props
+    const { hintClicked } = this.state
+
+    const hintNumber = hintClicked ? 1 : 0
+
     if (this.props.number === 1){
     switch (event.keyCode) {
       case 97: 
         return this.setState({ selectedOption: options[0].breed})
       case 98:
-        return this.setState({ selectedOption: options[1].breed})
+        return this.setState({ selectedOption: options[1 + hintNumber].breed})
       case 99: 
-        return this.setState({ selectedOption: options[2].breed})
+        return this.setState({ selectedOption: options[2 + hintNumber].breed})
       case 100: 
-        return this.setState({ selectedOption: options[3].breed})
+        return this.setState({ selectedOption: options[3 + hintNumber].breed})
       case 101: 
-        return this.setState({ selectedOption: options[4].breed})
+        return this.setState({ selectedOption: options[4 + hintNumber].breed})
      case 102: 
-        return this.setState({ selectedOption: options[5].breed})
+        return this.setState({ selectedOption: options[5 + hintNumber].breed})
 
       case 13: 
         return this.handleClick(event)
@@ -59,15 +63,15 @@ export default class Form extends React.Component {
         case 97: 
           return this.setState({ selectedOption: options[0].url})
         case 98:
-          return this.setState({ selectedOption: options[1].url})
+          return this.setState({ selectedOption: options[1 + hintNumber].url})
         case 99: 
-          return this.setState({ selectedOption: options[2].url})
+          return this.setState({ selectedOption: options[2 + hintNumber].url})
         case 100: 
-         return this.setState({ selectedOption: options[3].url})
+         return this.setState({ selectedOption: options[3 + hintNumber].url})
       case 101: 
-        return this.setState({ selectedOption: options[4].url})
+        return this.setState({ selectedOption: options[4 + hintNumber].url})
       case 102: 
-        return this.setState({ selectedOption: options[5].url})
+        return this.setState({ selectedOption: options[5 + hintNumber].url})
   
         case 13: 
           return this.handleClick(event)
