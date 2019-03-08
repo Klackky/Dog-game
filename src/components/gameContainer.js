@@ -37,7 +37,7 @@ class GameContainer extends React.Component {
       
       {if (!this.props.dogs[0] ) return 'Loading...'}
 
-      console.log(this.state.accuracy)
+      console.log("DOGSSS",this.props.dogs)
       
       if (this.props.dogs[0].number === 1) {
         return (<div>

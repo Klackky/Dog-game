@@ -10,7 +10,7 @@ export default class Form extends React.Component {
     score: 0,
     totalLevels: 0,
     showPopup: false,
-    accuracy: 0
+    accuracy: 0,
   }
 
   togglePopup() {
@@ -25,8 +25,71 @@ export default class Form extends React.Component {
     }
   }  
 
+  
+ 
+  keyHandling = (event) => {
+  console.log("Key code: " + event.keyCode);
+   console.log('imageOPtion',this.state.imageOption)
+
+    const { options } = this.props
+    if (this.props.number === 1){
+    switch (event.keyCode) {
+      case 97: 
+        return this.setState({ selectedOption: options[0].breed})
+      case 98:
+        return this.setState({ selectedOption: options[1].breed})
+      case 99: 
+        return this.setState({ selectedOption: options[2].breed})
+      case 100: 
+        return this.setState({ selectedOption: options[3].breed})
+      case 101: 
+        return this.setState({ selectedOption: options[4].breed})
+     case 102: 
+        return this.setState({ selectedOption: options[5].breed})
+
+      case 13: 
+        return this.handleClick(event)
+        case 73: 
+        return this.handleHint()
+      default:
+        break;
+    }
+    }else{
+      switch (event.keyCode) {
+        case 97: 
+          return this.setState({ selectedOption: options[0].url})
+        case 98:
+          return this.setState({ selectedOption: options[1].url})
+        case 99: 
+          return this.setState({ selectedOption: options[2].url})
+        case 100: 
+         return this.setState({ selectedOption: options[3].url})
+      case 101: 
+        return this.setState({ selectedOption: options[4].url})
+      case 102: 
+        return this.setState({ selectedOption: options[5].url})
+  
+        case 13: 
+          return this.handleClick(event)
+          case 73: 
+          return this.handleHint()
+        default:
+          break;
+      }
+    }
+  }
+ 
+  componentDidMount=() => {
+    
+    window.addEventListener("keyup", this.keyHandling);
+  }
+ 
+
   handleClick = (event) => {
+
     event.preventDefault();
+
+   
     if(this.props.correctAnswer === this.state.selectedOption) {
       this.setState({score: this.state.score +1, totalLevels: this.state.totalLevels + 1, hintClicked: false}, function () {
         this.props.callbackFromParent(this.state.score, this.state.totalLevels)
@@ -43,6 +106,8 @@ export default class Form extends React.Component {
       this.togglePopup()
       }, 2000);
     }
+
+
 }
 
 
@@ -58,6 +123,10 @@ export default class Form extends React.Component {
     })
    }
 
+  
+   
+
+
   correctAnswerOrHint = (option, index) =>
    !this.state.hintClicked ||
    option.breed === this.props.correctAnswer ||
@@ -70,31 +139,44 @@ export default class Form extends React.Component {
     index >= 2
 
     filterOptions = () => {
+    
       return this.props.options
         .filter(this.correctAnswerOrHint)
         .map(option =>
          <p>
-            <input className="game__radio" onChange={this.handleOptionChange} name="question" type="radio" value={option.breed} id={option.breed} />
+            <input className="game__radio"
+             onChange={this.handleOptionChange} name="question"
+             type="radio" 
+             value={option.breed} 
+             id={option.breed}
+             checked = {option.breed === this.state.selectedOption} />
             <label for={option.breed} key={option.breed} className="game__answer" data-a="42"> {option.breed}</label>
          </p>
+         
         )
-   
     }
    
     filterOptionsTwo = () => {
+
      return this.props.options
      .filter(this.correctAnswerOrHintTwo)
      .map(option =>
    
    
-        <label key={option.url} className="game-answer">
-            <input onChange={this.handleOptionChange} type="radio" name="answer" className="input-hidden"     value = {option.url}/>
+        <label key={option.url} className="game-answer" >
+        
+            <input onChange={this.handleOptionChange}
+           
+             type="radio" name="answer"
+             className="input-hidden"    
+              value = {option.url}
+              checked = {option.url === this.state.selectedOption}/>
                     <img src = {option.url}
                        alt = "dog"/>
         </label>
      )
     }
-
+  
   render() {
   if (this.props.number === 1) {
   return (<div>
@@ -102,7 +184,9 @@ export default class Form extends React.Component {
     <form className="game__content" onSubmit={this.handleClick}>
     <div className="game__wrapper">
       <div className="game__option">
+     
         {this.filterOptions()}
+        
        </div>
     </div>
     <button className="game__submit" type="submit"> Submit </button>
@@ -120,6 +204,7 @@ export default class Form extends React.Component {
     
   )
   } else {
+   
     return (<div>
       <button onClick={this.handleHint} className="game__hint">Hint</button>
       <form className="game__content"  onSubmit={this.handleClick}>
