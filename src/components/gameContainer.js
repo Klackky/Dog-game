@@ -5,7 +5,9 @@ import ProgressBar from './progressBar.js';
 import {setDog, getDogs} from '../actions/getDogs.js';
 import {connect} from 'react-redux';
 import KeyboardHint from './keyboardHint'
-
+import reducers from '../reducers/index.js';
+import App from '../App.js';
+import './keyboardHint.css'
 class GameContainer extends React.Component {
     state = {
       accuracy: 0,
@@ -41,10 +43,12 @@ class GameContainer extends React.Component {
       if (this.props.dogs[0].number === 1) {
         
         return (<div>
+         
+          <h2>{this.state.correctInRow <3? 'Level 1': this.state.correctInRow >= 3 && this.state.correctInRow <6? 'Level 2' : 'Level 3'}</h2>
           <ProgressBar progress={this.state.accuracy}/>
           <KeyboardHint/>
-          <h2>{this.state.correctInRow <3? 'Level 1': this.state.correctInRow >= 3 && this.state.correctInRow <6? 'Level 2' : 'Level 3'}</h2>
           <Image photo = {this.props.dogs[0].url} number={this.props.dogs[0].number}/> 
+         
           <Form 
             options ={this.state.correctInRow < 3? [...this.props.dogs].slice(0, 3) : 
               this.state.correctInRow >= 3 && this.state.correctInRow < 6? 
@@ -57,9 +61,9 @@ class GameContainer extends React.Component {
           </div>)
       } else {
         return (<div>
+          <h2>{this.state.correctInRow <3? 'Level 1': this.state.correctInRow >= 3 && this.state.correctInRow <6? 'Level 2' : 'Level 3'}</h2>
           <ProgressBar progress={this.state.accuracy}/>
           <KeyboardHint/>
-          <h2>{this.state.correctInRow <3? 'Level 1': this.state.correctInRow >= 3 && this.state.correctInRow <6? 'Level 2' : 'Level 3'}</h2>
           <Image photo = {this.props.dogs[0].breed} number={this.props.dogs[0].number}/> 
           <Form 
             options ={this.state.correctInRow < 3? [...this.props.dogs].slice(0, 3) : 
@@ -69,7 +73,6 @@ class GameContainer extends React.Component {
 
 
           updateFrame={this.props.getDogs} number={this.props.dogs[0].number} callbackFromParent={this.myCallback} correctAnswer={this.props.dogs[0].url } />   
-
           </div>)
       }
       }

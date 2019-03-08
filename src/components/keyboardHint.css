@@ -1,16 +1,29 @@
 .keyboard-box{
-     
-    background-color:  #F87DA9;
+
+    background-color: #F87DA9;
     display: block;
     padding: 10px;
-    background-color: #F87DA9;
     color: white;
     border: 1px solid #F87DA9;
     margin: 10px auto;
-    font-size: 12px; 
-    width: 350px;
+    font-size: 12px;
+    width: 600px;
+    height: 300px;
     grid-area: a;
+    text-align: center;
     position: relative;
-    right: 480px;
-    top : 0px
+    margin-top: -60px;
+    top: 0px;
 }
+ 
+ .keyboard-image{
+    display: flex;
+ 
+ }
+
+ h2 {
+     text-align: center;
+     margin: 10px auto -20px;
+     color: #75787c;
+ }
+
